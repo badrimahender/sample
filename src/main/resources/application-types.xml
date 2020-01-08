@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<types:mule xmlns:types="http://www.mulesoft.org/schema/mule/types">
+  <types:catalog>
+    <types:type name="sam" format="json">
+      <types:shape format="weave" example="examples/text.json.txt"><![CDATA[%dw 2.0
+type sam = Array<{|
+  code: String, 
+  planeType: String, 
+  totalSeats: Number {"typeId": "int"}, 
+  destination: String, 
+  departureDate: String, 
+  origin: String, 
+  price: Number {"typeId": "int"}, 
+  airlineName: String, 
+  seatsAvailable: Number {"typeId": "int"}, 
+  ID: Number {"typeId": "int"}
+|}> {"MetadataFormat": "json",
+"example": "[{\"code\":\"rree0001\",\"planeType\":\"Boeing 787\",\"totalSeats\":200,\"destination\":\"LAX\",\"departureDate\":\"2016-01-20T00:00:00\",\"origin\":\"MUA\",\"price\":541,\"airlineName\":\"American Airlines\",\"seatsAvailable\":0,\"ID\":1}]"}
+
+]]></types:shape>
+    </types:type>
+  </types:catalog>
+  <types:enrichment select="#d278a87f-bf77-46b9-8dd6-ec87e63cd5dd">
+    <types:processor-declaration>
+      <types:output-event>
+        <types:message>
+          <types:payload type="sam"/>
+        </types:message>
+      </types:output-event>
+    </types:processor-declaration>
+  </types:enrichment>
+</types:mule>
